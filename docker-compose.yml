@@ -1,5 +1,5 @@
 version: '3.7'
-services: 
+services:
   web:
     build: .
     container_name: wit_web
@@ -23,7 +23,7 @@ services:
       - "8081:80"
     links:
       - db
-    depends_on: 
+    depends_on:
       - db
 # volumes:
 #   mysql-data:
