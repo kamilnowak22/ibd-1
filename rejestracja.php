@@ -7,11 +7,16 @@ use Valitron\Validator;
 
 $uzytkownicy = new Uzytkownicy();
 $v = new Validator($_POST);
+$komunikat = "";
+
 
 if (isset($_POST['zapisz'])) {
     $v->rule('required', ['imie', 'nazwisko', 'adres', 'email', 'login', 'haslo']);
+    $v->rule('email', ['email']);
 
-    if ($v->validate()) {
+    if ($uzytkownicy->czyIstniejeJuzTakiUzytkownik($_POST['login'], $_POST['email'])) {
+        $komunikat = "Użytkownik o podnym loginie lub adresie email już istnieje.";
+    } else if ($v->validate()) {
         // brak błędów, można dodać użytkownika
         $uzytkownicy->dodaj($_POST);
         header("Location: index.php?msg=1");
@@ -32,6 +37,12 @@ include 'header.php';
             <li><?=implode('<br>', $err) ?></li>
         <?php endforeach; ?>
         </ul>
+    </div>
+<?php endif; ?>
+
+<?php if (!empty($komunikat)): ?>
+    <div class="alert alert-danger">
+        <strong><?=$komunikat?></strong>
     </div>
 <?php endif; ?>
 

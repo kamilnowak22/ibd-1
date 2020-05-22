@@ -4,7 +4,11 @@ namespace Ibd;
 
 class Koszyk
 {
-	
+	/**
+	 * Instancja klasy obsługującej połączenie do bazy.
+	 *
+	 * @var Db
+	 */
 	private $db;
 
 	public function __construct()
@@ -19,11 +23,12 @@ class Koszyk
 	 */
 	public function pobierzWszystkie()
 	{
-        $sql = "
+		$sql = "
 			SELECT ks.*, ko.liczba_sztuk, ko.id AS id_koszyka
 			FROM ksiazki ks JOIN koszyk ko ON ks.id = ko.id_ksiazki
 			WHERE ko.id_sesji = '" . session_id() . "'
 			ORDER BY ko.data_dodania DESC";
+
 		return $this->db->pobierzWszystko($sql);
 	}
 
@@ -79,7 +84,6 @@ class Koszyk
 		return false;
 	}
 
-
 	/**
 	 * Zmienia (usuwa) ilości sztuk książek w koszyku.
 	 *
@@ -88,15 +92,14 @@ class Koszyk
 	public function zmienLiczbeSztuk($dane)
 	{
 		foreach($dane as $idKoszyka => $ilosc) {
-			if ($ilosc <= 0) {
+			if($ilosc <= 0)
 				$this->db->usun('koszyk', $idKoszyka);
-            } else {
+			else
 				$this->db->aktualizuj('koszyk', ['liczba_sztuk' => $ilosc], $idKoszyka);
-            }
 		}
 	}
 
-    /**
+	 /**
      * Czyści koszyk.
      *
      * @param string $idSesji
@@ -106,4 +109,5 @@ class Koszyk
     {
         return $this->db->wykonaj("DELETE FROM koszyk WHERE id_sesji = :id_sesji", ['id_sesji' => $idSesji]);
     }
+
 }

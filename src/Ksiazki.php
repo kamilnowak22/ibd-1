@@ -4,7 +4,11 @@ namespace Ibd;
 
 class Ksiazki
 {
-   
+    /**
+     * Instancja klasy obsługującej połączenie do bazy.
+     *
+     * @var Db
+     */
     private $db;
 
     public function __construct()
@@ -19,9 +23,7 @@ class Ksiazki
      */
     public function pobierzWszystkie()
     {
-        $sql = "SELECT ksiazki.id, id_autora, id_kategorii, tytul, nazwa, imie, nazwisko, opis, cena, liczba_stron, isbn, zdjecie FROM ksiazki 
-		 join kategorie on ksiazki.id_kategorii=kategorie.id
-		 join autorzy  on ksiazki.id_autora=autorzy.id";
+        $sql = "SELECT k.*, a.*, k2.* FROM ksiazki k JOIN autorzy as a ON k.id_autora = a.id JOIN kategorie k2 on k.id_kategorii = k2.id; ";
 
         return $this->db->pobierzWszystko($sql);
     }

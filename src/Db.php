@@ -4,7 +4,7 @@ namespace Ibd;
 
 /**
  * Klasa obsługująca połączenie z bazą danych MySQL.
-
+ * 
  */
 class Db
 {
@@ -14,7 +14,7 @@ class Db
 	private $dbLogin = 'ibd';
 	private $dbPassword = 'ibdtest';
 	private $dbHost = 'localhost';
-	private $dbName = 'ibd';
+    private $dbName = 'ibd';
 
 	/**
 	 * @var \PDO
@@ -140,9 +140,9 @@ class Db
 
         $params['id'] = $id;
         return $stmt->execute($params);
-    }
-
-    /**
+	}
+	
+	/**
      * Wykonuje podane zapytanie SQL z parametrami.
      *
      * @param       $sql

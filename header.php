@@ -53,6 +53,9 @@ $koszykHtml = "<span class='badge badge-dark' id='wKoszyku'>$liczbaKsiazekWKoszy
                 <?= Menu::generujOpcje('index.php', 'Strona główna') ?>
                 <?= Menu::generujOpcje('ksiazki.lista.php', 'Książki') ?>
                 <?= Menu::generujOpcje('koszyk.lista.php', "Koszyk $koszykHtml") ?>
+                <?php if (!empty($_SESSION['id_uzytkownika'])): ?>
+                    <?= Menu::generujOpcje('zamowienie.lista.php', 'Zamówienia') ?>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
@@ -60,4 +63,4 @@ $koszykHtml = "<span class='badge badge-dark' id='wKoszyku'>$liczbaKsiazekWKoszy
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">

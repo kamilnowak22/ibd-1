@@ -10,7 +10,9 @@ if (!empty($_POST)) {
     if ($wynik) {
         header("Location: $_POST[powrot]");
         exit();
+    } else {
+
     }
 }
 
-header("Location: index.php");
+header("Location: index.php"); 

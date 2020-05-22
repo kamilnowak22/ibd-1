@@ -16,7 +16,11 @@ class Kategorie
         $this->db = new Db();
     }
 
-
+    /**
+     * Pobiera wszystkie kategorie.
+     *
+     * @return array
+     */
     public function pobierzWszystkie(): array
     {
         $sql = "SELECT * FROM kategorie";
