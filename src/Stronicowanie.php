@@ -39,6 +39,11 @@ class Stronicowanie
      */
     private $parametryZapytania;
 
+    public function setNaStronie($ilosc){
+        $this->naStronie = $ilosc;
+    }
+
+
     public function __construct($parametryGet, $parametryZapytania)
     {
         $this->db = new Db();

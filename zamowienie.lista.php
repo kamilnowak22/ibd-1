@@ -3,7 +3,7 @@ include 'header.php';
 
 use Ibd\Zamowienia;
 
-
+// pobieranie kategorii
 $zamownienia = new Zamowienia();
 if(!empty($_SESSION['id_uzytkownika'])) {
     $lista = $zamownienia->znajdzZamownienia($_SESSION['id_uzytkownika']);
